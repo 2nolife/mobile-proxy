@@ -87,22 +87,13 @@
   /* last server output */
   $("#modem-control .last-output").click(function(event) {
     event.preventDefault()
-    call_api("/api/last", 2000)
+    call_api("/last", 2000)
   })
 
   /* backend test */
   $("#modem-control .echo-test").click(function(event) {
     event.preventDefault()
-    if (busy) return
-    beforeAjax()
-    me(function() {
-      $.ajax({
-        url: "/api/echo",
-        statusCode: statusCodes
-      }).done(function(output) {
-        afterAjax(output, 2000)
-      })
-    })
+    call_api("/echo", 2000)
   })
 
   /* prevent form submission */
