@@ -13,12 +13,11 @@ f.close()
 last_line = lines[-1] if len(lines) > 0 else ""
 if last_line != ip:
   lines.append(ip)
-  with open(ips_txt, 'a') as f:
-    f.write(ip+'\n')
-
-with open(ips_txt, 'w+') as f:
-  f.write("\n".join(lines[-5:])+"\n")
 
 print('\nIP history')
 for line in reversed(lines):
   print(line)
+
+lines = filter(lambda line: line != "restarted", lines)
+with open(ips_txt, 'w+') as f:
+  f.write("\n".join(lines[-5:])+"\n")
