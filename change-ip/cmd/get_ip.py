@@ -18,6 +18,6 @@ print('\nIP history')
 for line in reversed(lines):
   print(line)
 
-lines = lambda line: line != "restarted", lines
+lines = list(filter(lambda line: line != "restarted", lines))
 with open(ips_txt, 'w+') as f:
   f.write("\n".join(lines[-5:])+"\n")
