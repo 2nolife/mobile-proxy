@@ -11,7 +11,7 @@ lines = f.read().splitlines()
 f.close()
 
 last_line = lines[-1] if len(lines) > 0 else ""
-if last_line != ip+"\n":
+if last_line != ip:
   lines.append(ip)
   f = open('output/ips.txt', 'a')
   f.write(ip+'\n')
