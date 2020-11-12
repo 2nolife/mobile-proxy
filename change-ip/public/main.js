@@ -98,7 +98,7 @@
   })
 
   /* last server output */
-  $("#modem-control .last-output").click(function(event) {
+  $("#modem-control .last-call").click(function(event) {
     event.preventDefault()
     call_api("/last", 2000)
   })
