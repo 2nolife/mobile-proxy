@@ -12,4 +12,4 @@
 *.iml
 
 # SSH private key
-scrappy_id_rsa
+mobileproxy_id_rsa
