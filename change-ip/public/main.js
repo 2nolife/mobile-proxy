@@ -88,13 +88,13 @@
   /* reboot modem */
   $("#modem-control .modem-reboot").click(function(event) {
     event.preventDefault()
-    call_api_async("/modem?a=reboot", 20000)
+    call_api_async("/modem?a=reboot", 10000)
   })
 
   /* reconnect modem */
   $("#modem-control .modem-reconnect").click(function(event) {
     event.preventDefault()
-    call_api_async("/modem?a=reconnect", 5000)
+    call_api_async("/modem?a=reconnect", 10000)
   })
 
   /* last server output */
