@@ -75,13 +75,13 @@
   /* reboot modem */
   $("#modem-control .modem-reboot").click(function(event) {
     event.preventDefault()
-    call_api("/modem?a=reboot", 120000)
+    call_api("/modem?a=reboot", 20000)
   })
 
   /* reconnect modem */
   $("#modem-control .modem-reconnect").click(function(event) {
     event.preventDefault()
-    call_api("/modem?a=reconnect", 60000)
+    call_api("/modem?a=reconnect", 5000)
   })
 
   /* backend test */

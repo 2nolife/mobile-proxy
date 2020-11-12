@@ -17,3 +17,8 @@ elif action == "reconnect":
   api.connect(url, s)
 elif action == "status":
   api.isConnected(url, s)
+
+if action == "reboot" or action == "reconnect":
+  f = open('output/ips.txt', 'a')
+  f.write("\n")
+  f.close()

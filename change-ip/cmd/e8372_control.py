@@ -4,7 +4,7 @@ import time
 
 action = sys.argv[1]
 gw     = sys.argv[2]
-# print('Action', action, 'on', gw)
+print('Action', action, 'on', gw)
 
 ctx = api.login(gw)
 
@@ -16,3 +16,8 @@ elif action == "reconnect":
   api.connect(ctx)
 elif action == "status":
   api.isConnected(ctx)
+
+if action == "reboot" or action == "reconnect":
+  f = open('output/ips.txt', 'a')
+  f.write("\n")
+  f.close()
