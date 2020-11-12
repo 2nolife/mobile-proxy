@@ -106,7 +106,7 @@
   })
 
   /* prevent form submission */
-  $("#pin-form").submit(function(event) {
+  $("#account-form").submit(function(event) {
     event.preventDefault()
   })
 
