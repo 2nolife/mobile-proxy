@@ -43,33 +43,6 @@ function shell(cmd, callback) {
   })
 }
 
-/** check if user supplied valid pin for the node or have one assigned (response on error) */
-function validPin(req, res) {
-  var user = basicAuthParser(req.headers.authorization).username
-  var usr_pin = config.user_node[user]
-  var req_pin = req.query.pin
-  var pin = req_pin || usr_pin
-
-  // user has pin assigned, it can only use assigned pin
-  if (usr_pin != "*" && req_pin && req_pin != usr_pin) {
-    console.log("PIN "+req_pin+" not valid for user '"+user+"'")
-    res.status(401)
-    res.send("Not valid PIN")
-    return ""
-  }
-
-  // user may use all pins but did not specify which one
-  if (usr_pin == "*" && req_pin == undefined) {
-    console.log("PIN not specified for user '"+user+"'")
-    res.status(401)
-    res.send("No PIN specified")
-    return ""
-  }
-
-  // console.log("Validated PIN "+pin+" for user '"+user+"'")
-  return pin
-}
-
 /** auth users only */
 app.use(basicAuth({
     challenge: true,
@@ -96,81 +69,35 @@ app.use("/api/logout", function(req, res) {
   res.send("ok")
 })
 
-/** /node?a=on&pin=123 -> forward -> /node-1?a=on&pin=123 */
-app.use("/api/node", function(req, res) {
+/** /modem?a=on */
+app.use("/api/modem", function(req, res) {
   var user = basicAuthParser(req.headers.authorization).username
-  var pin = validPin(req, res)
-  if (!pin) return
+  var action = req.query.a
+  var modem = config.modem
 
-  // find node to forward to by pin
-  var forward = ""
-  config.nodes.forEach((node) => {
-    if (node.pin == pin) forward = node.path
-  })
+  console.log("Incoming action '"+action+"' on "+modem.path+" for user '"+user+"'")
 
-  if (forward) {
-    console.log("PIN "+pin+" forwarding to "+forward+" for user '"+user+"'")
-    res.redirect(forward+url.parse(req.url, true).search)
+  if (action == "ip") {
+    var cmd = config.cmd_get_ip
+      .replace("{ip}", modem.ip)
+
+    shell(cmd, (stdout) => {
+      res.send(stdout)
+    })
+  } else if (action == "reboot" || action == "reconnect" || action == "status") {
+    var cmd = config.cmd_device_control
+      .replace("{action}", action)
+      .replace("{device}", modem.device)
+      .replace("{gateway}", modem.gateway)
+      .replace("{ip}", modem.ip)
+
+    shell(cmd, (stdout) => {
+      res.send(stdout)
+    })
   } else {
-    console.log("PIN "+pin+" no forward for user '"+user+"'")
     res.status(401)
-    res.send("No forward for PIN")
+    res.send("Invalid action")
   }
-})
-
-/** /node-1?a=on */
-config.nodes.forEach((node) => {
-  console.log("Adding "+node.path)
-
-  app.use(node.path, function(req, res) {
-    var user = basicAuthParser(req.headers.authorization).username
-    var pin = validPin(req, res)
-    if (!pin) return
-
-    var action = req.query.a
-
-    // check if supplied pin matches node pin
-    console.log("Incoming action '"+action+"' on "+node.path+" for user '"+user+"'")
-    console.log("PIN "+pin+" ("+(pin == node.pin ? "valid" : "invalid")+")")
-
-    if (pin == node.pin) {
-
-      if (action == "ip") {
-        var cmd = config.cmd_get_ip
-          .replace("{ip}", node.ip)
-
-        shell(cmd, (stdout) => {
-          res.send(stdout)
-        })
-      } else if (action == "reboot" || action == "reconnect" || action == "status") {
-        var cmd = config.cmd_device_control
-          .replace("{action}", action)
-          .replace("{device}", node.device)
-          .replace("{gateway}", node.gateway)
-          .replace("{ip}", node.ip)
-
-        shell(cmd, (stdout) => {
-          res.send(stdout)
-        })
-      } else if (action == "proxy") {
-        var cmd = config.cmd_proxy_restart
-          .replace("{pin}", node.pin)
-          .replace("{port}", node.port)
-
-        shell(cmd, (stdout) => {
-          res.send(stdout)
-        })
-      } else {
-        res.status(401)
-        res.send("Invalid action")
-      }
-
-    } else {
-      res.status(401)
-      res.send("Invalid PIN")
-    }
-  })
-
 })
 
 /** bootstrap and jquery */

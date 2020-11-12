@@ -21,7 +21,7 @@
     busy = true
     $("#output").html("")
     $("#loader").show()
-    $("#node-control a").addClass("disabled")
+    $("#modem-control a").addClass("disabled")
   }
 
   /* get logged in user and continue with original call */
@@ -41,13 +41,13 @@
       var s = "<pre>{text}</pre>".replace("{text}", text)
       $("#loader").hide()
       $("#output").html(s)
-      $("#node-control a").removeClass("disabled")
+      $("#modem-control a").removeClass("disabled")
       busy = false
     }, sleep || 5000)
   }
 
   /* call backend */
-  function call_node(url, sleep) {
+  function call_modem(url, sleep) {
     if (busy) return
     beforeAjax()
     me(function() {
@@ -61,37 +61,37 @@
   }
 
   /* modem status */
-  $("#node-control .node-status").click(function(event) {
+  $("#modem-control .modem-status").click(function(event) {
     event.preventDefault()
-    call_node("/node?a=status", 2000)
+    call_modem("/modem?a=status", 2000)
   })
 
   /* model IP */
-  $("#node-control .node-ip").click(function(event) {
+  $("#modem-control .modem-ip").click(function(event) {
     event.preventDefault()
-    call_node("/node?a=ip", 2000)
+    call_modem("/modem?a=ip", 2000)
   })
 
   /* reboot modem */
-  $("#node-control .node-reboot").click(function(event) {
+  $("#modem-control .modem-reboot").click(function(event) {
     event.preventDefault()
-    call_node("/node?a=reboot", 20000)
+    call_modem("/modem?a=reboot", 20000)
   })
 
   /* reconnect modem */
-  $("#node-control .node-reconnect").click(function(event) {
+  $("#modem-control .modem-reconnect").click(function(event) {
     event.preventDefault()
-    call_node("/node?a=reconnect", 5000)
+    call_modem("/modem?a=reconnect", 5000)
   })
 
   /* reboot proxy */
-  $("#node-control .node-proxy").click(function(event) {
+  $("#modem-control .modem-proxy").click(function(event) {
     event.preventDefault()
-    call_node("/node?a=proxy", 5000)
+    call_modem("/modem?a=proxy", 5000)
   })
 
   /* backend test */
-  $("#node-control .echo-test").click(function(event) {
+  $("#modem-control .echo-test").click(function(event) {
     event.preventDefault()
     if (busy) return
     beforeAjax()
