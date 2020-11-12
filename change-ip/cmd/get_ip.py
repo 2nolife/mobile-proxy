@@ -17,6 +17,11 @@ if last_line != ip:
   f.write(ip+'\n')
   f.close()
 
+f=open('output/ips.txt','w+')
+for line in lines[-5:]:
+  print(line)
+f.close()
+
 print('\nIP history')
 for line in reversed(lines):
   print(line)
