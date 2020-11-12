@@ -105,6 +105,11 @@
     })
   })
 
+  /* prevent form submission */
+  $("#pin-form").submit(function(event) {
+    event.preventDefault()
+  })
+
   /* logout */
   $("#logout").click(function() {
     if (busy) return

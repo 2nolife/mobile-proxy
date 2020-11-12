@@ -75,7 +75,7 @@ app.use("/api/modem", function(req, res) {
   var action = req.query.a
   var modem = config.modem
 
-  console.log("Incoming action '"+action+"' on "+modem.path+" for user '"+user+"'")
+  console.log("Incoming action '"+action+"' on "+modem.gateway+" for user '"+user+"'")
 
   if (action == "ip") {
     var cmd = config.cmd_get_ip
