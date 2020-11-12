@@ -13,6 +13,7 @@
     "jquery": "latest",
     "url": "latest",
     "express-basic-auth": "latest",
-    "basic-auth-parser": "latest"
+    "basic-auth-parser": "latest",
+    "fs": "latest"
   }
 }

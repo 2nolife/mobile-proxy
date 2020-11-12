@@ -84,6 +84,12 @@
     call_api("/modem?a=reconnect", 5000)
   })
 
+  /* last server output */
+  $("#modem-control .last-output").click(function(event) {
+    event.preventDefault()
+    call_api("/api/last", 2000)
+  })
+
   /* backend test */
   $("#modem-control .echo-test").click(function(event) {
     event.preventDefault()

@@ -3,6 +3,7 @@ var request = require('request')
 var url = require('url')
 var basicAuth = require('express-basic-auth');
 var basicAuthParser = require('basic-auth-parser');
+var fs = require('fs');
 
 var app = express()
 var config = require('./config.json')
@@ -29,17 +30,19 @@ function shell(cmd, callback) {
   exec(cmd, (error, stdout, stderr) => {
       if (error) {
           console.log(`error: ${error.message}`)
+          fs.writeFile("output/last.txt", `error ${counter}\n${error.message}`)
           callback(`error ${counter}\n${error.message}`)
           return
       }
       if (stderr) {
           console.log(`stderr: ${stderr}`)
+          fs.writeFile("output/last.txt", `stderr ${counter}\n${stdout}`)
           callback(`stderr ${counter}\n${stdout}`)
           return
       }
       console.log(`stdout: ${stdout}`)
+      fs.writeFile("output/last.txt", `ok ${counter}\n${stdout}`)
       callback(`ok ${counter}\n${stdout}`)
-      // callback(`${stdout}`)
   })
 }
 
@@ -54,6 +57,14 @@ app.use("/api/echo", function(req, res) {
   var user = basicAuthParser(req.headers.authorization).username
   shell("echo Seems to be working, "+user, (stdout) => {
     res.send(stdout)
+  })
+})
+
+/** test if backend can execute commands */
+app.use("/api/last", function(req, res) {
+  var user = basicAuthParser(req.headers.authorization).username
+  fs.readFile("output/last.txt", "utf8", function (err,data) {
+    res.send(data)
   })
 })
 
