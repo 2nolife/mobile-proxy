@@ -2,9 +2,8 @@
 
   "port": "8080",
 
-  "cmd_get_ip":         "python3 cmd/get_ip.py {ip}",
-  "cmd_device_control": "cmd/{device}_control.cmd {action} {gateway} {ip}",
-  "cmd_proxy_restart":  "cmd/squid_restart.cmd {pin} {port}",
+  "cmd_get_ip":        "python3 cmd/get_ip.py {ip}",
+  "cmd_modem_control": "python3 cmd/{device}_control.py {action} {gateway} {ip}",
 
   "modem": {
     "device": "e3372",

@@ -4,7 +4,7 @@ import time
 
 action = sys.argv[1]
 gw     = sys.argv[2]
-# print('Action', action, 'on', gw)
+print('Action', action, 'on', gw)
 
 url = "http://"+gw
 s = api.login(url)

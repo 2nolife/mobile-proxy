@@ -38,8 +38,8 @@ function shell(cmd, callback) {
           return
       }
       console.log(`stdout: ${stdout}`)
-      // callback(`ok ${counter}\n${stdout}`)
-      callback(`${stdout}`)
+      callback(`ok ${counter}\n${stdout}`)
+      // callback(`${stdout}`)
   })
 }
 
@@ -85,7 +85,7 @@ app.use("/api/modem", function(req, res) {
       res.send(stdout)
     })
   } else if (action == "reboot" || action == "reconnect" || action == "status") {
-    var cmd = config.cmd_device_control
+    var cmd = config.cmd_modem_control
       .replace("{action}", action)
       .replace("{device}", modem.device)
       .replace("{gateway}", modem.gateway)
