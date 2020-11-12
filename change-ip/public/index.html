@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Control Panel</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/../node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <script src="/../node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="/../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" href="/main.css">
+
+</head>
+<body>
+
+<div class="jumbotron text-center header" style="margin-bottom:0">
+  <h1>Control Panel (IP)</h1>
+</div>
+
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+  <a class="navbar-brand" href="/index.html">Navbar</a>
+  <ul class="navbar-nav mr-auto">
+    <li class="nav-item">
+      <a class="nav-link home" href="/index.html">Home</a>
+    </li>
+  </ul>
+  <form class="form-inline" id="pin-form">
+    <p style="padding:4px 10px !important;" class="p-3 mb-2 bg-info text-white" id="username"></p>
+    <button style="margin-left:10px;" class="btn btn-warning my-2 my-sm-0" id="logout" type="submit">Logout</button>
+    <input style="margin-left:10px;" class="form-control mr-sm-2" id="pin" type="text" placeholder="PIN">
+  </form>
+</nav>
+
+<div class="container" style="margin-top:30px; margin-bottom:20px">
+  <div class="row">
+    <div class="col-sm-4">
+      <ul class="nav nav-pills flex-column" id="node-control">
+        <li class="nav-item">
+          <a class="nav-link node-ip" href="#">My IP</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link node-status" href="#">Status</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link node-reconnect" href="#">Reconnect</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link node-reboot" href="#">Reboot</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link node-proxy" href="#">Proxy reset</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link echo-test" href="#">Echo test</a>
+        </li>
+      </ul>
+      <hr class="d-sm-none">
+    </div>
+    <div class="col-sm-8">
+      <img id="loader" src="loader.gif" />
+      <div id="output"></div>
+    </div>
+  </div>
+</div>
+
+<div class="jumbotron text-center footer" style="margin-bottom:0">
+  <p>&copy; Scrappy</p>
+</div>
+
+<script src="/main.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+{
+
+  "port": "8080",
+
+  "cmd_get_ip":         "cmd/get_ip.cmd {ip}",
+  "cmd_device_control": "cmd/{device}_control.cmd {action} {gateway} {ip}",
+  "cmd_proxy_restart":  "cmd/squid_restart.cmd {pin} {port}",
+
+  "nodes": [
+    { "pin": "8",  "path": "/api/node-8",  "device": "e3372", "gateway": "192.168.8.1",  "ip": "192.168.8.100" }
+  ],
+  
+  "user_pwd": {
+    "kannopae": "2LYJR2s0eovHY",
+    "lecipely": "BnnGvI3UcMEIg",
+    "minaquyn": "K1mBQvWrGJ7go"
+  },
+
+  "user_node": {
+    "user0": "*",
+
+    "kannopae": "8",
+    "lecipely": "8",
+    "minaquyn": "8"
+  }
+
+}

@@ -1,0 +1,15 @@
+# Mac
+.DS_Store
+
+# Log files
+*.log
+
+# npm
+node_modules/
+package-lock.json
+
+# other directories
+output/
+
+# python
+__pycache__/
