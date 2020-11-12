@@ -13,7 +13,7 @@ echo Modem CP port
 autossh -M 0 -fC -p $srv_port1 -N -R 0.0.0.0:40001:localhost:8080 $srv_host1 -o $keep_a -o $keep_c -i $ssh_key
 
 echo HTTP proxy port
-utossh -M 0 -fC -p $srv_port1 -N -R 0.0.0.0.0:40002:localhost:3128 $srv_host1 -o $keep_a -o $keep_c -i $ssh_key
+autossh -M 0 -fC -p $srv_port1 -N -R 0.0.0.0.0:40002:localhost:3128 $srv_host1 -o $keep_a -o $keep_c -i $ssh_key
 
 echo VPN port
 autossh -M 0 -fC -p $srv_port1 -N -R 0.0.0.0.0:40004:localhost:1194 $srv_host1 -o $keep_a -o $keep_c -i $ssh_key
