@@ -18,6 +18,5 @@ elif action == "status":
   api.isConnected(ctx)
 
 if action == "reboot" or action == "reconnect":
-  f = open('output/ips.txt', 'a')
-  f.write("restarted\n")
-  f.close()
+  with open('output/ips.txt', 'a') as f:
+    f.write("restarted\n")

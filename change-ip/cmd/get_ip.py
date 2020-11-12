@@ -5,20 +5,19 @@ print('Public IP address\n{}'.format(ip))
 
 open('output/ips.txt','a').close()
 
-f = open('output/ips.txt','r+')
+ips_txt = 'output/ips.txt'
+f = open(ips_txt, 'r+')
 lines = f.read().splitlines()
 f.close()
 
 last_line = lines[-1] if len(lines) > 0 else ""
 if last_line != ip:
   lines.append(ip)
-  f = open('output/ips.txt', 'a')
-  f.write(ip+'\n')
-  f.close()
+  with open(ips_txt, 'a') as f:
+    f.write(ip+'\n')
 
-with open('output/ips.txt','w+') as f:
-  f.write("\n".join(lines[-5:]))
-  f.write("\n")
+with open(ips_txt, 'w+') as f:
+  f.write("\n".join(lines[-5:])+"\n")
 
 print('\nIP history')
 for line in reversed(lines):
