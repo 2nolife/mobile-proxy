@@ -30,18 +30,18 @@ function shell(cmd, callback) {
   exec(cmd, (error, stdout, stderr) => {
       if (error) {
           console.log(`error: ${error.message}`)
-          fs.writeFile("output/last.txt", `error ${counter}\n${error.message}`)
+          fs.writeFile("output/last.txt", `error ${counter}\n${error.message}`, function (err) {})
           callback(`error ${counter}\n${error.message}`)
           return
       }
       if (stderr) {
           console.log(`stderr: ${stderr}`)
-          fs.writeFile("output/last.txt", `stderr ${counter}\n${stdout}`)
+          fs.writeFile("output/last.txt", `stderr ${counter}\n${stdout}`, function (err) {})
           callback(`stderr ${counter}\n${stdout}`)
           return
       }
       console.log(`stdout: ${stdout}`)
-      fs.writeFile("output/last.txt", `ok ${counter}\n${stdout}`)
+      fs.writeFile("output/last.txt", `ok ${counter}\n${stdout}`, function (err) {})
       callback(`ok ${counter}\n${stdout}`)
   })
 }
@@ -63,7 +63,7 @@ app.use("/api/echo", function(req, res) {
 /** test if backend can execute commands */
 app.use("/api/last", function(req, res) {
   var user = basicAuthParser(req.headers.authorization).username
-  fs.readFile("output/last.txt", "utf8", function (err,data) {
+  fs.readFile("output/last.txt", function (err,data) {
     res.send(data)
   })
 })
