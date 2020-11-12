@@ -19,5 +19,5 @@ elif action == "status":
 
 if action == "reboot" or action == "reconnect":
   f = open('output/ips.txt', 'a')
-  f.write("\n")
+  f.write("restarted\n")
   f.close()
