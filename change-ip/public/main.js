@@ -47,12 +47,12 @@
   }
 
   /* call backend */
-  function call_modem(url, sleep) {
+  function call_api(url, sleep) {
     if (busy) return
     beforeAjax()
     me(function() {
       $.ajax({
-        url: "/api"+url+"&pin="+$("#pin").val(),
+        url: "/api"+url,
         statusCode: statusCodes
       }).done(function(output) {
         afterAjax(output, sleep)
@@ -63,31 +63,31 @@
   /* modem status */
   $("#modem-control .modem-status").click(function(event) {
     event.preventDefault()
-    call_modem("/modem?a=status", 2000)
+    call_api("/modem?a=status", 2000)
   })
 
   /* model IP */
   $("#modem-control .modem-ip").click(function(event) {
     event.preventDefault()
-    call_modem("/modem?a=ip", 2000)
+    call_api("/modem?a=ip", 2000)
   })
 
   /* reboot modem */
   $("#modem-control .modem-reboot").click(function(event) {
     event.preventDefault()
-    call_modem("/modem?a=reboot", 20000)
+    call_api("/modem?a=reboot", 20000)
   })
 
   /* reconnect modem */
   $("#modem-control .modem-reconnect").click(function(event) {
     event.preventDefault()
-    call_modem("/modem?a=reconnect", 5000)
+    call_api("/modem?a=reconnect", 5000)
   })
 
   /* reboot proxy */
   $("#modem-control .modem-proxy").click(function(event) {
     event.preventDefault()
-    call_modem("/modem?a=proxy", 5000)
+    call_api("/modem?a=proxy", 5000)
   })
 
   /* backend test */
@@ -103,11 +103,6 @@
         afterAjax(output, 2000)
       })
     })
-  })
-
-  /* prevent form submission */
-  $("#pin-form").submit(function(event) {
-    event.preventDefault()
   })
 
   /* logout */
