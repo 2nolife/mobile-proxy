@@ -3,10 +3,9 @@ from requests import get
 ip = get('https://api.ipify.org').text
 print('Public IP address\n{}'.format(ip))
 
-f=open('output/ips.txt','a')
-f.close()
+open('output/ips.txt','a').close()
 
-f=open('output/ips.txt','r+')
+f = open('output/ips.txt','r+')
 lines = f.read().splitlines()
 f.close()
 
@@ -17,10 +16,9 @@ if last_line != ip:
   f.write(ip+'\n')
   f.close()
 
-f=open('output/ips.txt','w+')
-for line in lines[-5:]:
-  f.write(line+'\n')
-f.close()
+with open('output/ips.txt','w+') as f:
+  f.write("\n".join(lines[-5:]))
+  f.write("\n")
 
 print('\nIP history')
 for line in reversed(lines):
