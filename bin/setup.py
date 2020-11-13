@@ -10,10 +10,11 @@ server2_host    = "intel@cr.kanalov.net"
 server2_sshport = "2424"
 
 # unit tunnel ports
-unit_port_ssh  = sys.argv[1]
-unit_port_cp   = sys.argv[2]
-unit_port_http = sys.argv[3]
-unit_port_vpn  = sys.argv[4]
+start_port = int(sys.argv[1])
+unit_port_ssh  = str(start_port)
+unit_port_cp   = str(start_port+1)
+unit_port_http = str(start_port+2)
+unit_port_vpn  = str(start_port+4)
 
 unit_prvkey  = "mobileproxy1_rsa"
 unit_pubkey  = "mobileproxy1_rsa.pub"
