@@ -73,8 +73,8 @@ st = os.stat(filename)
 os.chmod(filename, st.st_mode | stat.S_IEXEC)
 
 # template
-print("Template: upload-pubkey")
-with open(bin_dir+"/upload-pubkey.template.sh", "r") as f:
+print("Template: change-key")
+with open(bin_dir+"/change-key.template.sh", "r") as f:
   template = f.read()
 
 template = template.format(
@@ -83,7 +83,7 @@ template = template.format(
   srv1_port = server1_sshport
 )
 
-filename = unit_dir+"/upload-pubkey.sh"
+filename = unit_dir+"/change-key.sh"
 with open(filename, "w") as f:
   f.write(template)
 
