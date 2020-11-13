@@ -5,7 +5,7 @@ import sys
 import os
 import stat
 
-if len(sys.argv) != 2:
+if len(sys.argv) != 3:
   print("Use: setup.py {user} {port}")
   sys.exit(1)
 
