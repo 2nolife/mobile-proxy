@@ -72,6 +72,24 @@ with open(filename, "w") as f:
 st = os.stat(filename)
 os.chmod(filename, st.st_mode | stat.S_IEXEC)
 
+# template
+print("Template: upload-pubkey")
+with open(bin_dir+"/upload-pubkey.template.sh", "r") as f:
+  template = f.read()
+
+template = template.format(
+  srv_user  = remote_user,
+  srv1_host = server1_host,
+  srv1_port = server1_sshport
+)
+
+filename = unit_dir+"/upload-pubkey.sh"
+with open(filename, "w") as f:
+  f.write(template)
+
+st = os.stat(filename)
+os.chmod(filename, st.st_mode | stat.S_IEXEC)
+
 # check
 rclocal_patch = "sudo su -l pi -c \"exec /home/pi/mobile-proxy/unit/startup.sh\""
 with open("/etc/rc.local", "r") as f:
