@@ -1,7 +1,13 @@
 # unit setup script
+# python3 setup.py {user} {port}
+
 import sys
 import os
 import stat
+
+if len(sys.argv) != 2:
+  print("Use: setup.py {user} {port}")
+  sys.exit(1)
 
 # servers
 server1_host    = "ha.kanalov.net"
