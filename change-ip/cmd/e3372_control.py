@@ -1,3 +1,5 @@
+# control script for modem e3372
+
 import e3372_api as api
 import sys
 import time

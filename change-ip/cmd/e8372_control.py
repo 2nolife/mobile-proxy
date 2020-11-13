@@ -1,3 +1,5 @@
+# control script for modem e8372
+
 import e8372_api as api
 import sys
 import time

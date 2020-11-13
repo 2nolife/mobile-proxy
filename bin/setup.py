@@ -1,0 +1,66 @@
+# unit setup script
+import sys
+import os
+import stat
+
+# servers
+server1_host    = "intel@ha.kanalov.net"
+server1_sshport = "2424"
+server2_host    = "intel@cr.kanalov.net"
+server2_sshport = "2424"
+
+# unit tunnel ports
+unit_port_ssh  = sys.argv[1]
+unit_port_cp   = sys.argv[2]
+unit_port_http = sys.argv[3]
+unit_port_vpn  = sys.argv[4]
+
+unit_prvkey  = "mobileproxy1_rsa"
+unit_pubkey  = "mobileproxy1_rsa.pub"
+
+user_home = "/home/pi"
+project = "mobile-proxy"
+
+#
+# setup steps
+#
+
+bin_dir = user_home+"/"+project+"/bin"
+unit_dir = user_home+"/"+project+"/unit"
+
+if not os.path.exists(unit_dir):
+  os.mkdir(unit_dir)
+
+# template
+print("Template: ssh-tunnels")
+with open(bin_dir+"/ssh-tunnels.template.sh", "r") as f:
+  template = f.read()
+
+template = template.format(
+  srv1_host = server1_host,
+  srv1_port = server1_sshport,
+  prv_key   = unit_prvkey,
+  port1     = unit_port_ssh,
+  port2     = unit_port_cp,
+  port3     = unit_port_http,
+  port4     = unit_port_vpn
+)
+
+filename = unit_dir+"/ssh-tunnels.sh"
+with open(filename, "w") as f:
+  f.write(template)
+
+st = os.stat(filename)
+os.chmod(filename, st.st_mode | stat.S_IEXEC)
+
+# template
+print("Template: startup")
+with open(bin_dir+"/startup.template.sh", "r") as f:
+  template = f.read()
+
+filename = unit_dir+"/startup.sh"
+with open(filename, "w") as f:
+  f.write(template)
+
+st = os.stat(filename)
+os.chmod(filename, st.st_mode | stat.S_IEXEC)
