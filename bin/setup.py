@@ -4,13 +4,14 @@ import os
 import stat
 
 # servers
-server1_host    = "mp@ha.kanalov.net"
+server1_host    = "ha.kanalov.net"
 server1_sshport = "2426"
-server2_host    = "mp@cr.kanalov.net"
+server2_host    = "cr.kanalov.net"
 server2_sshport = "2426"
 
 # unit tunnel ports
-start_port = int(sys.argv[1])
+remote_user     = sys.argv[1]
+start_port      = int(sys.argv[2])
 unit_port_ssh   = str(start_port)
 unit_port_cp    = str(start_port+1)
 unit_port_http  = str(start_port+2)
@@ -36,6 +37,7 @@ with open(bin_dir+"/ssh-tunnels.template.sh", "r") as f:
   template = f.read()
 
 template = template.format(
+  srv_user  = remote_user,
   srv1_host = server1_host,
   srv1_port = server1_sshport,
   port1     = unit_port_ssh,
