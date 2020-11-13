@@ -13,3 +13,6 @@
 
 # SSH private key
 mobileproxy_id_rsa
+
+# unit files
+unit/
