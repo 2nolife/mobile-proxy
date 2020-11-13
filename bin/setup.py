@@ -4,10 +4,10 @@ import os
 import stat
 
 # servers
-server1_host    = "intel@ha.kanalov.net"
-server1_sshport = "2424"
-server2_host    = "intel@cr.kanalov.net"
-server2_sshport = "2424"
+server1_host    = "mp@ha.kanalov.net"
+server1_sshport = "2426"
+server2_host    = "mp@cr.kanalov.net"
+server2_sshport = "2426"
 
 # unit tunnel ports
 start_port = int(sys.argv[1])
