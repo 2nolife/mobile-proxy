@@ -9,7 +9,7 @@
 
 srv1_port={srv1_port}
 srv1_host={srv1_host}
-prv_key=~/mobile-proxy/unit/{prv_key}
+prv_key=~/.ssh/id_rsa
 
 keep_a=ServerAliveInterval=10
 keep_c=ServerAliveCountMax=3

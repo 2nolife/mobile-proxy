@@ -17,9 +17,6 @@ unit_port_http  = str(start_port+2)
 unit_port_socks = str(start_port+3)
 unit_port_vpn   = str(start_port+4)
 
-unit_prvkey  = "mobileproxy1_rsa"
-unit_pubkey  = "mobileproxy1_rsa.pub"
-
 user_home = "/home/pi"
 project = "mobile-proxy"
 
@@ -41,7 +38,6 @@ with open(bin_dir+"/ssh-tunnels.template.sh", "r") as f:
 template = template.format(
   srv1_host = server1_host,
   srv1_port = server1_sshport,
-  prv_key   = unit_prvkey,
   port1     = unit_port_ssh,
   port2     = unit_port_cp,
   port3     = unit_port_http,
@@ -69,21 +65,13 @@ st = os.stat(filename)
 os.chmod(filename, st.st_mode | stat.S_IEXEC)
 
 # check
-print("Patching: /etc/rc.local")
 rclocal_patch = "sudo su -l pi -c \"exec /home/pi/mobile-proxy/unit/startup.sh\""
 with open("/etc/rc.local", "r") as f:
   rclocal = f.read()
 rclocal_ok = rclocal_patch in rclocal
 
-# check
-filenames = [
-  "mobileproxy1_rsa",
-  "mobileproxy1_rsa.pub",
-  "ssh-tunnels.sh",
-  "startup.sh"
-]
 ok = True
-for filename in filenames:
+for filename in [ "ssh-tunnels.sh", "startup.sh" ]:
   if not os.path.exists(unit_dir+"/"+filename):
     print("ERROR Unit directory is missing '"+filename+"'")
     ok = False
