@@ -11,10 +11,11 @@ server2_sshport = "2424"
 
 # unit tunnel ports
 start_port = int(sys.argv[1])
-unit_port_ssh  = str(start_port)
-unit_port_cp   = str(start_port+1)
-unit_port_http = str(start_port+2)
-unit_port_vpn  = str(start_port+4)
+unit_port_ssh   = str(start_port)
+unit_port_cp    = str(start_port+1)
+unit_port_http  = str(start_port+2)
+unit_port_socks = str(start_port+3)
+unit_port_vpn   = str(start_port+4)
 
 unit_prvkey  = "mobileproxy1_rsa"
 unit_pubkey  = "mobileproxy1_rsa.pub"
@@ -44,7 +45,8 @@ template = template.format(
   port1     = unit_port_ssh,
   port2     = unit_port_cp,
   port3     = unit_port_http,
-  port4     = unit_port_vpn
+  port4     = unit_port_socks,
+  port5     = unit_port_vpn
 )
 
 filename = unit_dir+"/ssh-tunnels.sh"
