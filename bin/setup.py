@@ -64,3 +64,30 @@ with open(filename, "w") as f:
 
 st = os.stat(filename)
 os.chmod(filename, st.st_mode | stat.S_IEXEC)
+
+# check
+print("Patching: /etc/rc.local")
+rclocal_patch = "sudo su -l pi -c \"exec /home/pi/mobile-proxy/unit/startup.sh\""
+with open("/etc/rc.local", "r") as f:
+  rclocal = f.read()
+rclocal_ok = rclocal_patch in rclocal
+
+# check
+filenames = [
+  "mobileproxy1_rsa",
+  "mobileproxy1_rsa.pub",
+  "ssh-tunnels.sh",
+  "startup.sh"
+]
+ok = True
+for filename in filenames:
+  if not os.path.exists(unit_dir+"/"+filename):
+    print("ERROR Unit directory is missing '"+filename+"'")
+    ok = False
+
+if ok:
+  print("Unit configured!")
+  if not rclocal_ok:
+    print("Make sure '/etc/rc.local' contains")
+    print("""  sudo su -l pi -c "exec /home/pi/mobile-proxy/unit/startup.sh" """)
+  print("Don't forget to reboot")
