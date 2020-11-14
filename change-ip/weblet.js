@@ -12,6 +12,15 @@ const { exec } = require("child_process")
 
 var counter = 0
 
+config.user_pwd = {}
+fs.readFile("passwords", function (err, data) {
+  var user_pwd = data.toString().split(/\r?\n/)
+  user_pwd.forEach(function(v) {
+    v = v.trim()
+    if (v.length > 0) config.user_pwd[v.split(":")[0]] = v.split(":")[1]
+  })
+})
+
 /** send file back to client */
 function sendFile(res, url) {
   var options = { root : __dirname, dotfiles: 'deny' }
@@ -63,7 +72,7 @@ app.use("/api/echo", function(req, res) {
 /** test if backend can execute commands */
 app.use("/api/last", function(req, res) {
   var user = basicAuthParser(req.headers.authorization).username
-  fs.readFile("output/last.txt", function (err,data) {
+  fs.readFile("output/last.txt", function (err, data) {
     res.send(data)
   })
 })

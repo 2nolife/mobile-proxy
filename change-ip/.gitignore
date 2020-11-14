@@ -13,3 +13,6 @@ output/
 
 # python
 __pycache__/
+
+# passwords file
+passwords
