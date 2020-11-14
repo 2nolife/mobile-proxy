@@ -37,58 +37,33 @@ unit_dir = user_home+"/"+project+"/unit"
 if not os.path.exists(unit_dir):
   os.mkdir(unit_dir)
 
-# template
-print("Template: ssh-tunnels")
-with open(bin_dir+"/ssh-tunnels.template.sh", "r") as f:
-  template = f.read()
+def sh_template(name):
+  print("Template: "+name)
+  with open(bin_dir + "/"+name+".template.sh", "r") as f:
+    template = f.read()
 
-template = template.format(
-  srv_user  = remote_user,
-  srv1_host = server1_host,
-  srv1_port = server1_sshport,
-  port1     = unit_port_ssh,
-  port2     = unit_port_cp,
-  port3     = unit_port_http,
-  port4     = unit_port_socks,
-  port5     = unit_port_vpn
-)
+  template = template.format(
+    srv_user=remote_user,
+    srv1_host=server1_host,
+    srv1_port=server1_sshport,
+    port1=unit_port_ssh,
+    port2=unit_port_cp,
+    port3=unit_port_http,
+    port4=unit_port_socks,
+    port5=unit_port_vpn
+  )
 
-filename = unit_dir+"/ssh-tunnels.sh"
-with open(filename, "w") as f:
-  f.write(template)
+  filename = unit_dir + "/"+name+".sh"
+  with open(filename, "w") as f:
+    f.write(template)
 
-st = os.stat(filename)
-os.chmod(filename, st.st_mode | stat.S_IEXEC)
+  st = os.stat(filename)
+  os.chmod(filename, st.st_mode | stat.S_IEXEC)
 
-# template
-print("Template: startup")
-with open(bin_dir+"/startup.template.sh", "r") as f:
-  template = f.read()
-
-filename = unit_dir+"/startup.sh"
-with open(filename, "w") as f:
-  f.write(template)
-
-st = os.stat(filename)
-os.chmod(filename, st.st_mode | stat.S_IEXEC)
-
-# template
-print("Template: change-key")
-with open(bin_dir+"/change-key.template.sh", "r") as f:
-  template = f.read()
-
-template = template.format(
-  srv_user  = remote_user,
-  srv1_host = server1_host,
-  srv1_port = server1_sshport
-)
-
-filename = unit_dir+"/change-key.sh"
-with open(filename, "w") as f:
-  f.write(template)
-
-st = os.stat(filename)
-os.chmod(filename, st.st_mode | stat.S_IEXEC)
+sh_template("ssh-tunnels")
+sh_template("startup")
+sh_template("change-key")
+sh_template("change-pwd")
 
 # check
 rclocal_patch = "sudo su -l pi -c \"exec /home/pi/mobile-proxy/unit/startup.sh\""
