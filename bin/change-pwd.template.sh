@@ -4,12 +4,12 @@
 
 if [ -z "$1" ]
 then
-    echo Use: change-pwd {password}
+    echo Use: change-pwd {{password}}
     exit 1
 fi
 
 pwd=$1
-if [ ${#pwd} -ne 8 ]
+if [ ${{#pwd}} -ne 8 ]
 then
     echo Password must be 8 characters long
     exit 1
