@@ -21,7 +21,7 @@ cp_file=~/mobile-proxy/change-ip/passwords
 encpwd=$(openssl passwd -crypt $pwd)
 
 echo Patching $squid_file
-echo proxy:$encpwd > $squid_file
+echo proxy:$encpwd | sudo tee $squid_file
 
 echo Patching $cp_file
 echo admin:$encpwd > $cp_file
