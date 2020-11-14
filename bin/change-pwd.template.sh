@@ -24,6 +24,6 @@ echo Patching $squid_file
 echo proxy:$encpwd | sudo tee $squid_file
 
 echo Patching $cp_file
-echo admin:$encpwd > $cp_file
+echo admin:$pwd > $cp_file
 
 echo Updating SSH password
