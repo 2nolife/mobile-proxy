@@ -16,3 +16,6 @@ mobileproxy_id_rsa
 
 # unit files
 unit/
+
+# VPV config file
+other/*.ovpn

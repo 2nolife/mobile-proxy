@@ -60,19 +60,6 @@
     })
   }
 
-  /* call backend */
-  function call_api_async(url, sleep) {
-    if (busy) return
-    beforeAjax()
-    me(function() {
-      $.ajax({
-        url: "/api"+url,
-        statusCode: statusCodes
-      })
-      afterAjax("ok ...", sleep)
-    })
-  }
-
   /* modem status */
   $("#modem-control .modem-status").click(function(event) {
     event.preventDefault()
@@ -88,13 +75,13 @@
   /* reboot modem */
   $("#modem-control .modem-reboot").click(function(event) {
     event.preventDefault()
-    call_api_async("/modem?a=reboot", 10000)
+    call_api("/modem?a=reboot", 10000)
   })
 
   /* reconnect modem */
   $("#modem-control .modem-reconnect").click(function(event) {
     event.preventDefault()
-    call_api_async("/modem?a=reconnect", 10000)
+    call_api("/modem?a=reconnect", 10000)
   })
 
   /* last server output */

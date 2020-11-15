@@ -111,9 +111,17 @@ app.use("/api/modem", function(req, res) {
       .replace("{gateway}", modem.gateway)
       .replace("{ip}", modem.ip)
 
-    shell(cmd, (stdout) => {
-      res.send(stdout)
-    })
+    if (action == "reboot" || action == "reconnect") {
+      setTimeout(function() {
+        shell(cmd, (stdout) => { })
+      }, 1000)
+      res.send("ok .....")
+    } else {
+      shell(cmd, (stdout) => {
+        res.send(stdout)
+      })
+    }
+
   } else {
     res.status(401)
     res.send("Invalid action")
