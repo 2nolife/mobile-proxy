@@ -27,3 +27,4 @@ echo Patching $cp_file
 echo admin:$pwd > $cp_file
 
 echo Updating SSH password
+echo "pi:$pwd" | sudo chpasswd
