@@ -112,10 +112,10 @@ app.use("/api/modem", function(req, res) {
       .replace("{ip}", modem.ip)
 
     if (action == "reboot" || action == "reconnect") {
-      setTimeout(function() {
+      setTimeout(function() { // call later, results in last.txt
         shell(cmd, (stdout) => { })
       }, 1000)
-      res.send("ok .....")
+      res.send("ok ...")
     } else {
       shell(cmd, (stdout) => {
         res.send(stdout)
