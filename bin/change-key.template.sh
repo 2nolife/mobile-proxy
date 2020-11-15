@@ -7,8 +7,6 @@ prv_key=~/mobile-proxy/other/mobileproxy_id_rsa
 pub_key=~/.ssh/id_rsa.pub
 
 echo Creating new key
-touch ~/.ssh/id_rsa
-chmod 400 ~/.ssh/id_rsa
 ssh-keygen -f ~/.ssh/id_rsa -N "" -y
 cat $pub_key >> ~/.ssh/authorized_keys
 chmod og-wx ~/.ssh/authorized_keys
