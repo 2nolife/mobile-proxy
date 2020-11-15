@@ -12,7 +12,7 @@ open('output/ips.txt','a').close()
 
 ips_txt = 'output/ips.txt'
 with open(ips_txt, 'r+') as f:
-  lines = f.readlines()
+  lines = f.read().splitlines()
 
 last_line = lines[-1] if len(lines) > 0 else ""
 if last_line != ip:
