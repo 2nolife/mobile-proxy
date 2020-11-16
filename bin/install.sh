@@ -39,6 +39,8 @@ if [ -d mobile-proxy ]; then
 else
   git clone https://github.com/2nolife/mobile-proxy.git
 fi
+cd ~/mobile-proxy
+mkdir -p unit
 
 echo
 echo Decrypting project key
@@ -61,11 +63,11 @@ if [ -f id_rsa ]; then
 else
   echo -e 'y\n' | ssh-keygen -f id_rsa -N ""
 fi
-chmod 400 id_rsa
+chmod 600 id_rsa
 echo > config
 echo "Host *" >> config
 echo "  StrictHostKeyChecking no" >> config
-chmod 400 config
+chmod 600 config
 
 echo
 echo Configuring Squid
@@ -79,7 +81,7 @@ sudo touch banned.txt
 echo
 echo Configuring Control Panel
 cd ~/mobile-proxy/change-ip
-mkdir output
+mkdir -p output
 npm install
 
 echo
@@ -88,7 +90,7 @@ read -p "You will now be asked for VPN settings, press Enter to proceed"
 cd ~
 curl -O https://raw.githubusercontent.com/Angristan/openvpn-install/master/openvpn-install.sh
 chmod +x openvpn-install.sh
-udo ./openvpn-install.sh
+sudo ./openvpn-install.sh
 rm openvpn-install.sh
 mv *.ovpn ~/mobile-proxy/unit
 
