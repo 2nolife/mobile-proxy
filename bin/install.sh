@@ -7,16 +7,18 @@ echo You need to know the exact configuration parameters and the key GPG passwor
 echo The remote server must be ready to accept the key and SSH tunnels from this unit.
 echo
 
-marker=~/mp-installed
-if [ -f $marker ]; then
-  echo Install is already complete, to re-install remove $marker and re-run this script
+history=~/mp-install
+touch $history
+
+if grep -Fxq "complete" $history; then
+  echo Install is already complete!
+  echo To re-install delete \'mp-install\' and re-run the script
   exit 1
 fi
 
-if [ -z "$1" ]
-then
-    echo Use: install.sh {remote_user} {remote_port} {unit_password}
-    exit 1
+if [ -z "$1" ]; then
+  echo Use: install.sh {remote_user} {remote_port} {unit_password}
+  exit 1
 fi
 
 read -p "Press Enter to proceed or ^C to stop"
@@ -39,8 +41,7 @@ if [ -d mobile-proxy ]; then
 else
   git clone https://github.com/2nolife/mobile-proxy.git
 fi
-cd ~/mobile-proxy
-mkdir -p unit
+mkdir -p ~/mobile-proxy/unit
 
 echo
 echo Decrypting project key
@@ -51,13 +52,13 @@ else
   read -p "You will now be asked for the key GPG password, press Enter to proceed"
   gpg mobileproxy_id_rsa.gpg
 fi
-chmod 400 mobileproxy_id_rsa
+chmod 600 mobileproxy_id_rsa
 
 echo
 echo Congiguring SSH
 cd ~
 mkdir -p .ssh
-cd ~/.ssh
+cd .ssh
 if [ -f id_rsa ]; then
   echo id_rsa already exists
 else
@@ -86,13 +87,18 @@ npm install
 
 echo
 echo Configuring VPN
-read -p "You will now be asked for VPN settings, press Enter to proceed"
 cd ~
-curl -O https://raw.githubusercontent.com/Angristan/openvpn-install/master/openvpn-install.sh
-chmod +x openvpn-install.sh
-sudo ./openvpn-install.sh
-rm openvpn-install.sh
-mv *.ovpn ~/mobile-proxy/unit
+if compgen -G "mobile-proxy/unit/*.ovpn" > /dev/null; then
+  echo ovpn file already exists
+else
+  read -p "You will now be asked for VPN settings, press Enter to proceed"
+  curl -O https://raw.githubusercontent.com/Angristan/openvpn-install/master/openvpn-install.sh
+  chmod +x openvpn-install.sh
+  sudo ./openvpn-install.sh
+  rm openvpn-install.sh
+  sudo chown pi:pi *.ovpn
+  mv *.ovpn mobile-proxy/unit
+fi
 
 echo
 echo Configuring project
@@ -102,14 +108,15 @@ cd /etc
 sudo cp -n rc.local rc.local.old
 sudo cp ~/mobile-proxy/other/rc.local rc.local
 cd ~/mobile-proxy/unit
-/change-pwd.sh $password
-/change-key.sh
+./change-pwd.sh $password
+if grep -Fxq "change-key" $history; then
+   echo "key was already changed and uploaded"
+else
+  ./change-key.sh
+  echo "change-key" >> $history
+fi
 
 echo
-echo Finalising
-cd ~
-touch mp-installed
-
-echo
+echo "complete" >> $history
 read -p "All done, press Enter to reboot or ^C to stop"
 sudo reboot
