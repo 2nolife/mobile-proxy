@@ -1,0 +1,6 @@
+#!/bin/sh -e
+
+# mobile proxy
+sudo su -l pi -c "exec /home/pi/mobile-proxy/unit/startup.sh"
+
+exit 0
