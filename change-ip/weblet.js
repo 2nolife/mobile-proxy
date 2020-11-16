@@ -115,7 +115,7 @@ app.use("/api/modem", function(req, res) {
       setTimeout(function() { // call later, results in last.txt
         shell(cmd, (stdout) => { })
       }, 1000)
-      res.send("ok ...") 
+      res.send("ok ...")
     } else {
       shell(cmd, (stdout) => {
         res.send(stdout)

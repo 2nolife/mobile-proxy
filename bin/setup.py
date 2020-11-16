@@ -31,7 +31,7 @@ project = "mobile-proxy"
 # setup steps
 #
 
-bin_dir = user_home+"/"+project+"/bin"
+other_dir = user_home+"/"+project+"/other"
 unit_dir = user_home+"/"+project+"/unit"
 
 if not os.path.exists(unit_dir):
@@ -39,7 +39,7 @@ if not os.path.exists(unit_dir):
 
 def sh_template(name):
   print("Template: "+name)
-  with open(bin_dir + "/"+name+".template.sh", "r") as f:
+  with open(other_dir + "/"+name+".template.sh", "r") as f:
     template = f.read()
 
   template = template.format(
