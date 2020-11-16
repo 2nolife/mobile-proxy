@@ -2,12 +2,15 @@
 
 ### Pre ###
 
-Create `output` folder for files to be stored.
+* Install [Node](http://www.scala-sbt.org)
+* Install [Python 3](https://www.python.org)
+* `pip install huawei-modem-api-client`
 
 ### Start ###
 
-* Install [Node](http://www.scala-sbt.org)
-* From the project's `weblet` directory do `npm install` and then `npm start`
+* `mkdir output`
+* `npm install` 
+* `npm start`
 
 ```
 $ npm start

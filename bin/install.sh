@@ -29,7 +29,7 @@ password=$3
 
 echo
 echo Installing packages
-sudo apt-get -y install curl nano squid openvpn nodejs npm python3 git autossh
+sudo apt-get -y install curl nano autossh git python3 python3-pip squid openvpn nodejs npm
 
 echo
 echo Downloading project
@@ -84,6 +84,7 @@ echo Configuring Control Panel
 cd ~/mobile-proxy/change-ip
 mkdir -p output
 npm install
+pip3 install huawei-modem-api-client
 
 echo
 echo Configuring VPN
@@ -98,6 +99,13 @@ else
   rm openvpn-install.sh
   sudo chown pi:pi *.ovpn
   mv *.ovpn mobile-proxy/unit
+fi
+cd mobile-proxy/unit
+vpn_port=`expr $remote_port + 4`
+if [ -f mp.ovpn ]; then
+  sed -i "s/remote 0.0.0.0 1194/remote 0.0.0.0 $vpn_port/" mp.ovpn
+else
+  read -p "Do not forget to change port in OVPN file to $vpn_port, press Enter to proceed"
 fi
 
 echo
