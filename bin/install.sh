@@ -67,6 +67,16 @@ mkdir output
 npm install
 
 echo.
+echo Configuring VPN
+read -p "You will now be asked for VPN settings, press Enter to proceed"
+cd ~
+curl -O https://raw.githubusercontent.com/Angristan/openvpn-install/master/openvpn-install.sh
+chmod +x openvpn-install.sh
+udo ./openvpn-install.sh
+rm openvpn-install.sh
+mv *.ovpn ~/mobile-proxy/unit
+
+echo.
 echo Configuring project
 cd ~/mobile-proxy/bin
 python3 setup.py $remote_user $remote_port
