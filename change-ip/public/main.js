@@ -43,7 +43,7 @@
       $("#output").html(s)
       $("#modem-control a").removeClass("disabled")
       busy = false
-    }, sleep || 5000)
+    }, sleep || 1000)
   }
 
   /* call backend */
@@ -63,13 +63,13 @@
   /* modem status */
   $("#modem-control .modem-status").click(function(event) {
     event.preventDefault()
-    call_api("/modem?a=status", 2000)
+    call_api("/modem?a=status")
   })
 
   /* model IP */
   $("#modem-control .modem-ip").click(function(event) {
     event.preventDefault()
-    call_api("/modem?a=ip", 2000)
+    call_api("/modem?a=ip")
   })
 
   /* reboot modem */
@@ -87,13 +87,13 @@
   /* last server output */
   $("#modem-control .last-call").click(function(event) {
     event.preventDefault()
-    call_api("/last", 2000)
+    call_api("/last")
   })
 
   /* backend test */
   $("#modem-control .echo-test").click(function(event) {
     event.preventDefault()
-    call_api("/echo", 2000)
+    call_api("/echo")
   })
 
   /* prevent form submission */
