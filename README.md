@@ -146,7 +146,7 @@ Proxy configuration:
 * Install [OnenVPN](https://openvpn.net/download-open-vpn/) client
 * Download setup from the unit:
     ```
-    scp -P 3000 pi@example.org~/mobile-proxy/unit/mp.ovpn .
+    scp -P 3000 pi@example.org:~/mobile-proxy/unit/mp.ovpn .
     ```
 * Use this `OVPN` file to configure the client:
   * Give profile a proper name such as `Mobile Proxy`
