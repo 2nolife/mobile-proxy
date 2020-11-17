@@ -1,0 +1,20 @@
+Client OS: Raspberry PI OS Lite
+
+Server OS: Debian 10
+Add a new user "mp"
+Place the default key into "authorized_keys.default"
+$ cat mobileproxy_id_rsa.pub > /home/mp/.ssh/authorized_keys.default
+
+# add-user.sh
+adduser --disabled-password --gecos "" $1
+cp -r /home/mp/.ssh /home/$1
+mv /home/$1/.ssh/authorized_keys.default /home/$1/.ssh/authorized_keys
+chown -R $1:$1 /home/$1/.ssh
+
+# rem-user.sh
+userdel -rf $1
+
+Server SSH config:
+  * GatewayPorts yes
+  * ClientAliveInterval 10
+  * ClientAliveCountMax 3

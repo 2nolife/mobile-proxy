@@ -10,6 +10,14 @@ via SOCKS5 proxy, connect to the VNP port and the unit will use its VNP server. 
 can be changed on demand.    
 
 ```
+How client thinks it works:
+         ________              _______    VPN
+        | client | ---------> | unit | --------> [website]
+        |________|  services  |______}   proxy
+
+
+How it actually works:
+
   [website] <-------------> [website]          
              proxy |  VPN   
                    |                  
@@ -40,7 +48,7 @@ Do not remove or attach any parts of the unit while the power is on.
 
 You can find your configuration on the unit slip. 
 Assuming the unit was configured for:
-  * account `mp007` 
+  * user `mp007` 
   * port `3000` 
   * server `example.org`
   * password `secret`
@@ -78,7 +86,7 @@ To change the password for SSH, Control Panel and Proxy:
 ### Update software
 
 Be careful, the unit will not come online after reboot if: 
-  * Invalid account was used
+  * Invalid user was used
   * Invalid port was used
 
 To update:  
@@ -90,10 +98,10 @@ To update:
   * `python3 setup.py mp007 3000`
   * Reboot for changes to take effect `sudo reboot` 
 
-### Re-configure for a new server account
+### Re-configure for a new server user
 
 Be careful, the unit will not come online after reboot if: 
-  * Invalid new account was used
+  * Invalid new user was used
   * Invalid port was used
   * The server did not accept a new key 
   * Any other technical fault
@@ -104,7 +112,7 @@ network cable just in case if something goes wrong.
 To re-configure:  
   * Login to the unit
   * `cd ~/mobile-proxy/bin`
-  * `python3 setup.py new_account new_port`
+  * `python3 setup.py new_user new_port`
   * `cd ~/mobile-proxy/unit`
   * `./change-key.sh`
   * Reboot for changes to take effect `sudo reboot` 
