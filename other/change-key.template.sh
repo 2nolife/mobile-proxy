@@ -1,7 +1,8 @@
 #!/bin/bash -e
 
-echo Generate a new key and upload it to the server.
-echo The server must be ready to accept it. Do not use if not sure!
+echo WARNING
+echo Generate a new key and upload it to the server. The server must be ready to accept it.
+echo Do not proceed if not sure!
 read -p "Press Enter to generate a new key or ^C to stop"
 
 srv_user={srv_user}

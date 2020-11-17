@@ -4,7 +4,7 @@
 
 if [ -z "$1" ]
 then
-    echo Use: change-pwd {{password}}
+    echo Use: change-pwd.sh {{password}}
     exit 1
 fi
 

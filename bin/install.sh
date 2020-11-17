@@ -62,9 +62,11 @@ cd .ssh
 if [ -f id_rsa ]; then
   echo id_rsa already exists
 else
+  echo Generating a new key
   echo -e 'y\n' | ssh-keygen -f id_rsa -N ""
 fi
 chmod 600 id_rsa
+echo Patching config
 echo > config
 echo "Host *" >> config
 echo "  StrictHostKeyChecking no" >> config
@@ -73,8 +75,10 @@ chmod 600 config
 echo
 echo Configuring Squid
 cd /etc/squid
+echo Patching config
 sudo cp -n squid.conf squid.default.conf
 sudo cp ~/mobile-proxy/other/squid.conf squid.conf
+echo Creating dependent files
 sudo touch passwords
 sudo touch trusted.txt
 sudo touch banned.txt
@@ -97,10 +101,12 @@ else
   chmod +x openvpn-install.sh
   sudo ./openvpn-install.sh
   rm openvpn-install.sh
+  echo Moving OVPN file
   sudo chown pi:pi *.ovpn
   mv *.ovpn mobile-proxy/unit
 fi
 cd mobile-proxy/unit
+echo Patching mp.ovpn
 vpn_port=`expr $remote_port + 4`
 if [ -f mp.ovpn ]; then
   sed -i "s/remote 0.0.0.0 1194/remote 0.0.0.0 $vpn_port/" mp.ovpn
@@ -113,13 +119,16 @@ echo Configuring project
 cd ~/mobile-proxy/bin
 python3 setup.py $remote_user $remote_port
 cd /etc
+echo Patching rc.local
 sudo cp -n rc.local rc.local.old
 sudo cp ~/mobile-proxy/other/rc.local rc.local
 cd ~/mobile-proxy/unit
+echo Changing password
 ./change-pwd.sh $password
 if grep -Fxq "change-key" $history; then
    echo "key was already changed and uploaded"
 else
+  echo Generating and uploading a new key
   ./change-key.sh
   echo "change-key" >> $history
 fi
