@@ -36,7 +36,8 @@ can be changed on demand.
 
 You can find your configuration on the unit slip. 
 Assuming the unit was configured for:
-  * ports starting from `3000` 
+  * account `mp007` 
+  * port `3000` 
   * server `example.org`
   * password `secret`
 
@@ -70,12 +71,27 @@ To change the password for SSH, Control Panel and Proxy:
   * `cd ~/mobile-proxy/unit`
   * `./change-pwd.sh new_password`
 
+### Update software
+
+Be careful, the unit will not come online after reboot if: 
+  * Invalid account was used
+  * Invalid port was used
+
+To update:  
+  * Login to the unit
+  * `sudo apt-get update`
+  * `sudo apt-get upgrade -y`
+  * `cd ~/mobile-proxy/bin`
+  * `./git-pull.sh`
+  * `python3 setup.py mp007 3000`
+  * Reboot for changes to take effect `sudo reboot` 
+
 ### Re-configure for a new server account
 
 Be careful, the unit will not come online after reboot if: 
-  * The server did not accept a new key 
   * Invalid new account was used
   * Invalid port was used
+  * The server did not accept a new key 
   * Any other technical fault
 
 It is better to leave the existing key or to have the unit connected with an 
@@ -84,7 +100,7 @@ ethernet cable just in case if something goes wrong.
 To re-configure:  
   * Login to the unit
   * `cd ~/mobile-proxy/bin`
-  * `python3 setup.py new_user new_port`
+  * `python3 setup.py new_account new_port`
   * `cd ~/mobile-proxy/unit`
   * `./change-key.sh`
   * Reboot for changes to take effect `sudo reboot` 
@@ -120,6 +136,13 @@ Use `admin / secret` to authenticate when prompted.
 * Refresh the page and click `My IP` again. If the new IP is the same then this SIM
   card does not support IP changing via reconnect. Click `Reboot` and wait for one minute 
   until the connection is restored. Public IP should be changed for sure.   
+
+### Update to newer version
+
+  * Login to the unit
+  * `cd ~/mobile-proxy/bin`
+  * `./git-pull.sh`
+  * Reboot for changes to take effect `sudo reboot` 
 
 ## HTTP proxy
 
