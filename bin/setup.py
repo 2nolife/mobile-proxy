@@ -64,6 +64,7 @@ sh_template("ssh-tunnels")
 sh_template("startup")
 sh_template("change-key")
 sh_template("change-pwd")
+sh_template("service")
 
 # check
 rclocal_patch = "sudo su -l pi -c \"exec /home/pi/mobile-proxy/unit/startup.sh\""
