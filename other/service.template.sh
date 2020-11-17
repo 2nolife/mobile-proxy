@@ -9,11 +9,11 @@ fi
 action=$1
 name=$2
 
+file=~/mobile-proxy/unit/ssh-tunnels.sh
 if [ $action = 'disable' ]; then
   echo Disabling $name port
-  switch=n
+  sed -i "s/enable_$name=y/enable_$name=n/" $file
 else
   echo Enabling $name port
-  switch=y
+  sed -i "s/enable_$name=n/enable_$name=y/" $file
 fi
-sed -i "s/enable_$name=$switch/enable_$name=$switch/" ~/mobile-proxy/unit/ssh-tunnels.sh
