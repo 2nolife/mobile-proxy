@@ -94,8 +94,8 @@ Be careful, the unit will not come online after reboot if:
   * The server did not accept a new key 
   * Any other technical fault
 
-It is better to leave the existing key or to have the unit connected with an 
-ethernet cable just in case if something goes wrong.
+It is better to leave the existing key or to have the unit connected with a 
+network cable just in case if something goes wrong.
 
 To re-configure:  
   * Login to the unit
@@ -195,6 +195,24 @@ Login to the unit.
 * Open ports `netstat -an | grep LISTEN`
 * Control Panel log `tail -f ~/mobile-proxy/change-ip/output/weblet.log`
 
-## License ##
+## Troubleshoot
+
+If the unit is not reachable:
+  * Modem is not connected or has no signal
+  * SIM card has no data left or expired
+  * Server is down
+  * Router has no Internet connection
+  * Unit was shut down or has no power
+  * Unit technical fault
+
+Connectivity issues can be solved by attaching the unit with a network cable:
+  * Wait for `DHCP` to revolve the connection 
+  * `ssh pi@raspberrypi.local`
+  * Solve the issue or contact support
+  
+If software was damaged, a newly configured SD card can bring it back online. 
+Power off, swap the SD cards, power on.  
+
+# License
 
 This code is open source software licensed under the [GNU Lesser General Public License v3](http://www.gnu.org/licenses/lgpl-3.0.en.html).
