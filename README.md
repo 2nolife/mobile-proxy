@@ -25,12 +25,16 @@ can be changed on demand.
   * VPN
   * IP changing
 
-## Hardware parts
+## Hardware
 
 * RaspberryPI board (Pi Model B or better)
 * Huawei 3G modem (E3372 or E8372)
 * SD memory card (4GB or better)
 * Power supply (5V 1A or better)
+
+### Warning 
+
+Do not remove or attach any parts of the unit while the power is on.
 
 # How to? 
 
@@ -211,7 +215,7 @@ Connectivity issues can be solved by attaching the unit with a network cable:
   * Solve the issue or contact support
   
 If software was damaged, a newly configured SD card can bring it back online. 
-Power off, swap the SD cards, power on.  
+Power off, swap the SD cards, power on.
 
 # License
 
