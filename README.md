@@ -1,6 +1,6 @@
 # Mobile Proxy 
 
-A small unit providing proxy services over mobile 3G network. 
+A small unit providing proxy services over mobile 4G network. 
 Does not need connection to a router. All traffic goes in and out through mobile network.
 
 Unit comes configured with all software installed and accounts created. 
@@ -23,7 +23,7 @@ How it actually works:
                    |                  
  ______         (( o ))               ________              ________
 | unit | ----->   /_\   -----------> | server | <--------- | client |
-|______|   3G    /\_/\   SSH tunnel  |________|  services  |________|
+|______|   4G    /\_/\   SSH tunnel  |________|  services  |________|
 ```
 
 ## Services 
@@ -36,7 +36,7 @@ How it actually works:
 ## Hardware
 
 * RaspberryPI board (Pi Model B or better)
-* Huawei 3G modem (E3372 or E8372)
+* Huawei 4G modem (E3372 or E8372)
 * SD memory card (4GB or better)
 * Power supply (5V 1A or better)
 
