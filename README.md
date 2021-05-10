@@ -13,7 +13,7 @@ can be changed on demand.
 How client thinks it works:
          ________              _______    VPN
         | client | ---------> | unit | --------> [website]
-        |________|  services  |______}   proxy
+        |________|  services  |______|   proxy
 
 
 How it actually works:
