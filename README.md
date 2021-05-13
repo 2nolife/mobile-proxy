@@ -11,7 +11,7 @@ can be changed on demand.
 
 ```
 How client thinks it works:
-         ________              _______    VPN
+         ________              ______     VPN
         | client | ---------> | unit | --------> [website]
         |________|  services  |______|   proxy
 
